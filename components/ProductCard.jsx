@@ -6,9 +6,10 @@ import { useState } from "react"
 import { toast } from "sonner";
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { ChevronDown, ChevronUp, ExternalLink, TrendingDown } from "lucide-react";
+import { ChevronDown, ChevronUp, ExternalLink, Trash2, TrendingDown } from "lucide-react";
 import Link  from "next/link";
 import { Button } from "./ui/button";
+import PriceChart from "./PriceChart";
 
 export default function ProductCard({product}){
     const [showChart,setShowChart] = useState(false);
@@ -82,10 +83,15 @@ export default function ProductCard({product}){
                            View 
                         </Link>
                     </Button>
+
+                    <Button varaint="ghost" onClick={Delete} disabled={deleting} className="text-red-600 hover:text-red-700 hover:bg-red-50 gap-1"> 
+                        <Trash2 className="w-4 h-4"/>
+                        Delete
+                    </Button>
                 </div>
             </CardContent>
             <CardFooter>
-                <p>Card Footer</p>
+                <PriceChart productId={product.id}/>
             </CardFooter>
         </Card>
     )

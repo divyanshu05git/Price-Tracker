@@ -137,18 +137,17 @@ export async function getProducts(){
     }
 }
 
-export async function getPriceHistory(){
+export async function getPriceHistory(productId){
     try{
         const supabase = await createClient();
 
         const {data,error} = await supabase.from("price_history").select("*").eq("product_id",productId).order("checked_at",{ascending:true});
+        console.log(data)
 
         return data || [];
     }
     catch(err){
         console.log(err.message)
-        return {
-            message:err.message
-        }
+        return []
     }
 }
