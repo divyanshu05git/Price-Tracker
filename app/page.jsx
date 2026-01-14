@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { createClient } from "@/utils/supabase/server";
 import { Bell, LogIn, Rabbit, Shield, TrendingDown } from "lucide-react";
 import Image from "next/image";
+import { getProducts } from "./actions";
+import ProductCard from "@/components/ProductCard";
 
 export default async function Home() {
 
@@ -14,7 +16,7 @@ export default async function Home() {
   } = await supabase.auth.getUser();
 
   // const user=null;
-  const products=[];
+  const products=user?await getProducts():[];
 
   const FEATURES = [
     {
@@ -84,6 +86,20 @@ export default async function Home() {
             )}
         </div>
       </section>
+
+
+      {user &&<section className="max-w-7xl mx-auto px-4 pb-20 text-center">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-gray-900">Your Products</h2>
+          <span className="text-sm text-gray-500">
+            {products.length} {products.length==1?"product":"products"}
+          </span>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 items-start">
+          {products.map(product=><ProductCard key={product.id} product={product}/>)}
+        </div>
+      </section>}
 
 
       {user && products.length === 0 && (

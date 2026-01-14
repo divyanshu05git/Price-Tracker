@@ -120,12 +120,17 @@ export async function deleteProduct(productId){
 export async function getProducts(){
     try{
         const supabase = await createClient();
+        const {data : { user } } = await supabase.auth.getUser();
 
-        const {data,error} = await supabase.from("products").select("*").eq("user_id",user.id).order("created_At",{ascending:false});
+        const {data,error} = await supabase.from("products").select("*").eq("user_id",user.id).order("created_at",{ascending:false});
+
+        console.log(data)
+        console.log(user.id)
 
         return data || []
     }
     catch(err){
+        console.log(err.message)
         return {
             message:err.message
         }
