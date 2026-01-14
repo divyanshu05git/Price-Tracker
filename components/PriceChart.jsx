@@ -1,9 +1,9 @@
 "use client"
 
 import { getPriceHistory } from "@/app/actions";
-import { LineChart, Loader2 } from "lucide-react";
+import {  Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis ,LineChart} from "recharts";
 
 export default function PriceChart({productId}){
     const [data, setData] = useState([]);
