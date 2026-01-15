@@ -99,3 +99,12 @@ export async function POST(request){
         return NextResponse.json({error:err.message})
     }
 }
+
+export async function GET() {
+  return NextResponse.json({
+    message: "Price check endpoint is working. Use POST to trigger.",
+  });
+}
+
+// curl -X POST https://price-tracker-divyanshu.vercel.app/api/cron/check-prices \
+// -H  "Authorization: Bearer 87b0ebe3c4c1226105a48c882b33518ea4e599cadda07f78129d1a9f546fe9e1"
